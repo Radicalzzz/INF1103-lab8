@@ -63,7 +63,7 @@ def update_stock(inventory):
 
     print(f"Stock for product '{product.get_product_name()}' updated to {new_stock}.")
 
-def find_product(inventory):
+def search_product(inventory):
     product_id = input("Enter the product ID to search: ").strip().upper()
 
     product = inventory.find_product(product_id)
@@ -99,7 +99,7 @@ def main():
             elif choice == "3":
                 update_stock(inventory)
             elif choice == "4":
-                find_product(inventory)
+                search_product(inventory)
             elif choice == "5":
                 inventory.save_inventory()
                 print("\nInventory saved successfully.")

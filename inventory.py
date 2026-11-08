@@ -12,7 +12,7 @@ class Inventory:
         self.__products.append(product)
 
     def remove_product(self, product_id:str) -> None:
-        product = self.search_product(product_id)
+        product = self.find_product(product_id)
         if product is not None:
             self.__products.remove(product)
 
@@ -107,17 +107,3 @@ class Inventory:
             loaded_products.append(product)
             
         self.__products = loaded_products
-
-# Only run the following code if this script is executed directly (not imported)
-if __name__ == "__main__":
-    inventory = Inventory()
-    product1 = Product("P005", "Laptop", 1200.00, 15)
-    inventory.add_product(product1)
-
-    found_product = inventory.search_product("P009")
-    if found_product is not None:
-        print("Product found:", found_product.get_product_id())
-    else:
-        print("Product not found.")
-
-    inventory.display_all()
