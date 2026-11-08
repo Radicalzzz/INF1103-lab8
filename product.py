@@ -7,7 +7,7 @@ class Product(ABC):
     def get_fulfilment_info(self):
         pass
 
-    def __init__(self, product_id: str, product_name: str, price: float, stock: int, supplier: Supplier):        
+    def __init__(self, product_id: str, product_name: str, price: float, stock: int, supplier: Supplier) -> None:        
         self.__product_id = product_id
         self.__product_name = product_name
         self.__price = price
@@ -29,7 +29,7 @@ class Product(ABC):
     def update_stock(self, quantity):
         self.__stock = quantity
 
-    def get_supplier(self):
+    def get_supplier(self) -> Supplier:
         return self.__supplier
 
     def display_information(self):

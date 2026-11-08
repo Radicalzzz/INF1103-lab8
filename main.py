@@ -26,7 +26,7 @@ def add_product(inventory):
     # Placeholder for generating a unique product ID
     number = 1
 
-    while inventory.search_product(f"P{number:03d}") is not None:
+    while inventory.find_product(f"P{number:03d}") is not None:
         number += 1
 
     product_id = f"P{number:03d}"
@@ -51,7 +51,7 @@ def add_product(inventory):
 def update_stock(inventory):
     product_id = input("Enter the product ID to update stock: ").strip().upper()
 
-    product = inventory.search_product(product_id)
+    product = inventory.find_product(product_id)
     if product is None:
         print(f"Product with ID '{product_id}' not found.")
         return
@@ -63,10 +63,10 @@ def update_stock(inventory):
 
     print(f"Stock for product '{product.get_product_name()}' updated to {new_stock}.")
 
-def search_product(inventory):
+def find_product(inventory):
     product_id = input("Enter the product ID to search: ").strip().upper()
 
-    product = inventory.search_product(product_id)
+    product = inventory.find_product(product_id)
     if product is None:
         print(f"Product with ID '{product_id}' not found.")
         return
@@ -99,7 +99,7 @@ def main():
             elif choice == "3":
                 update_stock(inventory)
             elif choice == "4":
-                search_product(inventory)
+                find_product(inventory)
             elif choice == "5":
                 inventory.save_inventory()
                 print("\nInventory saved successfully.")
