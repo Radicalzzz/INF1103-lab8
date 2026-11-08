@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from supplier import Supplier
 
 class Product(ABC):
 
@@ -6,11 +7,12 @@ class Product(ABC):
     def get_fulfilment_info(self):
         pass
 
-    def __init__(self, product_id, product_name, price, stock):        
+    def __init__(self, product_id: str, product_name: str, price: float, stock: int, supplier: Supplier):        
         self.__product_id = product_id
         self.__product_name = product_name
         self.__price = price
         self.update_stock(stock)
+        self.__supplier: Supplier = supplier
 
     def get_product_id(self):
         return self.__product_id
@@ -26,6 +28,9 @@ class Product(ABC):
 
     def update_stock(self, quantity):
         self.__stock = quantity
+
+    def get_supplier(self):
+        return self.__supplier
 
     def display_information(self):
         print(
