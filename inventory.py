@@ -76,7 +76,7 @@ class Inventory:
             with open("inventory.json", "r") as file:
                 data = json.load(file)
         except FileNotFoundError:
-            return inventory
+            return
 
         loaded_products = []        
 
