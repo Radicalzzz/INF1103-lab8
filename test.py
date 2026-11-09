@@ -70,3 +70,8 @@ for product in inventory_a.get_products():
 
 for product in inventory_b.get_products():
     show_product_details(product)
+
+for product in inventory_b.get_products():
+    print()
+    product.display_information()
+    print(product.get_fulfilment_info())

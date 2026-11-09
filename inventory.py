@@ -3,6 +3,7 @@ import json
 from product import Product
 from physicalproduct import PhysicalProduct
 from digitalproduct import DigitalProduct
+from supplier import Supplier
 
 class Inventory:
     def __init__(self) -> None:
@@ -48,11 +49,17 @@ class Inventory:
         data = []
 
         for product in self.__products:
+            supplier = product.get_supplier()
             product_data = {
                 "id": product.get_product_id(),
                 "name": product.get_product_name(),
                 "price": product.get_price(),
-                "stock": product.get_stock()
+                "stock": product.get_stock(),
+                "supplier": {
+                    "id": supplier.get_supplier_id(),
+                    "name": supplier.get_name(),
+                    "contact_email": supplier.get_contact_email()
+                }
             }
 
             if isinstance(product, PhysicalProduct):
@@ -78,9 +85,29 @@ class Inventory:
         except FileNotFoundError:
             return
 
-        loaded_products = []        
+        loaded_products: list[Product] = []
+        suppliers: dict[str, Supplier] = {}  
 
         for product_data in data:
+            supplier_data = product_data.get("supplier")
+
+            if supplier_data is None:
+                supplier_data ={
+                    "id": "Unknown",
+                    "name": "Unknown supplier",
+                    "contact_email": ""
+                    }
+
+            supplier_id = supplier_data["id"]
+
+            if supplier_id not in suppliers:
+                suppliers[supplier_id] = Supplier(
+                    supplier_id,
+                    supplier_data["name"],
+                    supplier_data["contact_email"]
+                )
+
+            supplier = suppliers[supplier_id]
             product_type = product_data.get("type")
 
             if product_type == "physical":
@@ -89,7 +116,8 @@ class Inventory:
                     product_data["name"],
                     product_data["price"],
                     product_data["stock"],
-                    product_data["weight"]
+                    product_data["weight"],
+                    supplier
                 )
 
             elif product_type == "digital":
@@ -98,7 +126,8 @@ class Inventory:
                     product_data["name"],
                     product_data["price"],
                     product_data["stock"],
-                    product_data["download_size"]
+                    product_data["download_size"],
+                    supplier
                 )
 
             else:

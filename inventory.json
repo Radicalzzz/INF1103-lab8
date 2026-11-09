@@ -1,0 +1,15 @@
+[
+    {
+        "id": "P001",
+        "name": "Laptop",
+        "price": 1000.0,
+        "stock": 1000,
+        "supplier": {
+            "id": "Unknown",
+            "name": "Unknown supplier",
+            "contact_email": ""
+        },
+        "type": "physical",
+        "weight": 100.0
+    }
+]

@@ -1,6 +1,7 @@
 from inventory import Inventory
 from physicalproduct import PhysicalProduct
 from digitalproduct import DigitalProduct
+from supplier import Supplier
 
 def add_product(inventory) -> None:
 
@@ -30,18 +31,23 @@ def add_product(inventory) -> None:
         number += 1
 
     product_id = f"P{number:03d}"
+    supplier_id = input("Enter the supplier ID: ").strip()
+    suppler_name = input("Enter the supplier name: ").strip()
+    supplier_email = input("Enter the supplier contact: ").strip()
+
+    supplier = Supplier(supplier_id, suppler_name, supplier_email)
 
     if product_type == "1":
         weight = float(input("Enter the product weight in kg: "))
         if weight < 0:
             raise ValueError("Weight cannot be negative.")
-        product = PhysicalProduct(product_id, product_name, price, quantity, weight)
+        product = PhysicalProduct(product_id, product_name, price, quantity, weight, supplier)
 
     elif product_type == "2":
         download_size = float(input("Enter the download size in MB: "))
         if download_size < 0:
             raise ValueError("Download size cannot be negative.")
-        product = DigitalProduct(product_id, product_name, price, quantity, download_size)
+        product = DigitalProduct(product_id, product_name, price, quantity, download_size, supplier)
     
     inventory.add_product(product)
     inventory.save_inventory()
