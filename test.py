@@ -3,6 +3,11 @@ from physicalproduct import PhysicalProduct
 from digitalproduct import DigitalProduct
 from inventory import Inventory
 from order import Order
+from product import Product
+
+def show_product_details(product: Product) -> None:
+    product.display_information()
+    print(product.get_fulfilment_info())
 
 supplier1 = Supplier("5001", "ABC Supplies", "contact@abcsupplies.com")
 supplier1.display_information()
@@ -57,3 +62,11 @@ del order_b
 
 print("Keyboard still available:", keyboard.get_product_name())
 print(f"Order A total: ${order_a.calculate_total():.2f}")
+
+inventory_b.add_product(ebook)
+
+for product in inventory_a.get_products():
+    show_product_details(product)
+
+for product in inventory_b.get_products():
+    show_product_details(product)

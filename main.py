@@ -2,7 +2,7 @@ from inventory import Inventory
 from physicalproduct import PhysicalProduct
 from digitalproduct import DigitalProduct
 
-def add_product(inventory):
+def add_product(inventory) -> None:
 
     print("\n1. Physical Product")
     print("2. Digital Product")
@@ -48,7 +48,7 @@ def add_product(inventory):
 
     print(f"Product '{product_name}' added successfully with ID: {product_id}")
 
-def update_stock(inventory):
+def update_stock(inventory) -> None:
     product_id = input("Enter the product ID to update stock: ").strip().upper()
 
     product = inventory.find_product(product_id)
@@ -63,7 +63,7 @@ def update_stock(inventory):
 
     print(f"Stock for product '{product.get_product_name()}' updated to {new_stock}.")
 
-def search_product(inventory):
+def search_product(inventory) -> None:
     product_id = input("Enter the product ID to search: ").strip().upper()
 
     product = inventory.find_product(product_id)
@@ -74,7 +74,7 @@ def search_product(inventory):
         print("Product found:")
         product.display_information()
 
-def main():
+def main() -> None:
     inventory = Inventory()
     inventory.load_inventory()
 

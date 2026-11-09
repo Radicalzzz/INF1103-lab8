@@ -17,4 +17,4 @@ class Order:
         return total
 
     def get_order_lines(self) -> list[OrderLine]:
-        return self.__order_lines
+        return self.__order_lines.copy()

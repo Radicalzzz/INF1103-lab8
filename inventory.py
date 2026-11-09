@@ -5,7 +5,7 @@ from physicalproduct import PhysicalProduct
 from digitalproduct import DigitalProduct
 
 class Inventory:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__products: list[Product] = []
 
     def add_product(self, product: Product) -> None:
@@ -22,7 +22,7 @@ class Inventory:
                 return product
         return None
 
-    def display_all(self):
+    def display_all(self) -> None:
         if not self.__products:
             print("No products in inventory.")
             return
@@ -41,10 +41,10 @@ class Inventory:
 
         print("-------------------------------------------------------")
 
-    def get_products(self):
+    def get_products(self) -> list[Product]:
         return self.__products.copy()
 
-    def save_inventory(self):
+    def save_inventory(self) -> None:
         data = []
 
         for product in self.__products:
@@ -71,7 +71,7 @@ class Inventory:
         with open("inventory.json", "w") as file:
             json.dump(data, file, indent=4)
 
-    def load_inventory(self):
+    def load_inventory(self) -> None:
         try:
             with open("inventory.json", "r") as file:
                 data = json.load(file)
